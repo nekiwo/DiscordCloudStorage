@@ -1,11 +1,11 @@
 const upload = () => {
     const file = document.getElementById("input").files[0];
-    const FormData = new FormData();
-    FormData.append("file", file);
+    const form = new FormData();
+    form.append("file", file);
 
     fetch("/upload", {
         method: "POST",
-        body: FormData
+        body: form
     }).then(
         response => response.json()
     ).then(

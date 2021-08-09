@@ -14,5 +14,8 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# goland
+# Goland
 .idea/
+
+# Testing chunk files
+/src/temp
