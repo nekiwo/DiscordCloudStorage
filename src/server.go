@@ -1,14 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -20,7 +18,7 @@ func server() {
 	// Routing
 	http.HandleFunc("/upload", func(res http.ResponseWriter, req *http.Request) {
 		file, handler, err := req.FormFile("file")
-		if err != nil {fmt.Println(err)}
+		ErrCheck(err)
 		defer file.Close()
 
 		req.MultipartReader()
@@ -30,13 +28,11 @@ func server() {
 		os.MkdirAll("temp/file" + FileID, os.ModePerm)
 
 		// Create temp file
-		TempFile, err := ioutil.TempFile("temp", "upload" + FileID + filepath.Ext(handler.Filename))
-		if err != nil {fmt.Println(err)}
+		TempFile, _ := ioutil.TempFile("temp", "upload" + FileID)
 		defer TempFile.Close()
 
 		// Copy over the file
-		FileBytes, err := io.ReadAll(file)
-		if err != nil {fmt.Println(err)}
+		FileBytes, _ := io.ReadAll(file)
 
 		// Write file's data on the new temp file
 		TempFile.Write(FileBytes)
@@ -44,7 +40,7 @@ func server() {
 		FileInfo, _ := TempFile.Stat()
 		FileSize := FileInfo.Size()
 
-		ChunkSize := 8 << 20
+		ChunkSize := 7 << 20
 		TotalChunks := int(math.Ceil(float64(FileSize) / float64(ChunkSize)))
 
 		for i := 0; i < TotalChunks; i++ {
@@ -57,16 +53,18 @@ func server() {
 
 			// Create file
 			FileName := "./temp/file" + FileID + "/chunk" + strconv.Itoa(i)
-			_, err := os.Create(FileName)
-			if err != nil {fmt.Println(err); os.Exit(1)}
+			_, _ = os.Create(FileName)
 
 			// Save file
 			ioutil.WriteFile(FileName, ChunkData, os.ModeAppend)
 		}
 
+		// Delete temp file
+		os.Remove(TempFile.Name())
+
 		// Collect all metadata for future reference
 		// Upload it to discord
-		UploadFile(MetaData{
+		UploadFiles(MetaData{
 			handler.Filename,
 			FileID,
 			TotalChunks,
