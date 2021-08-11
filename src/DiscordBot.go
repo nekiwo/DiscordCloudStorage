@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
+	"strings"
 	"syscall"
 )
 
@@ -61,9 +64,51 @@ func UploadFiles(data MetaData) {
 	for i := 0; i < len(AllFiles); i++ {
 		ids = ids + "," + AllFiles[i]
 	}
-	discord.ChannelMessageSend("874716702988980244", data.FileName + "," + data.FileID + ids)
+	discord.ChannelMessageSend("874716702988980244", data.FileID + "," + data.FileName + ids)
 }
 
-func DownloadFiles(id string) {
+func DownloadFiles(id string) string {
+	// Get last 100 messages
+	msgs, err := discord.ChannelMessages("874716702988980244", 100, "", "", "")
+	ErrCheck(err)
 
+	for i := 0; i < len(msgs); i++ {
+		// Check for limit hit (100 msgs)
+		if i == 99 {
+			msgs2, err := discord.ChannelMessages("874716702988980244", 100, msgs[i].ID, "", "")
+			ErrCheck(err)
+
+			msgs = msgs2
+			i = 0
+		}
+
+		// Check ID
+		data := strings.Split(msgs[i].Content, ",")
+		if data[0] == id {
+			out, err := os.Create(data[1])
+			ErrCheck(err)
+			defer out.Close()
+
+			// Download all chunks
+			for j := 2; j < len(data); j++ {
+				fmt.Println("test" +  strconv.Itoa(j))
+				msg, err := discord.ChannelMessage("874477682501496852", data[j])
+				ErrCheck(err)
+
+				res, err := http.Get(msg.Attachments[0].URL)
+				ErrCheck(err)
+				defer res.Body.Close()
+
+				fmt.Println(msg.Attachments[0].URL)
+
+				n, err := io.Copy(out, res.Body)
+				fmt.Println(n)
+				ErrCheck(err)
+			}
+			fmt.Println("testend")
+		}
+	}
+
+	// Couldn't find the file
+	return "null"
 }

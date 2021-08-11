@@ -28,11 +28,13 @@ func server() {
 		os.MkdirAll("temp/file" + FileID, os.ModePerm)
 
 		// Create temp file
-		TempFile, _ := ioutil.TempFile("temp", "upload" + FileID)
+		TempFile, err := ioutil.TempFile("temp", "upload*")
+		ErrCheck(err)
 		defer TempFile.Close()
 
 		// Copy over the file
-		FileBytes, _ := io.ReadAll(file)
+		FileBytes, err := io.ReadAll(file)
+		ErrCheck(err)
 
 		// Write file's data on the new temp file
 		TempFile.Write(FileBytes)
@@ -60,7 +62,8 @@ func server() {
 		}
 
 		// Delete temp file
-		os.Remove(TempFile.Name())
+		err = os.Remove("temp/" + TempFile.Name())
+		ErrCheck(err)
 
 		// Collect all metadata for future reference
 		// Upload it to discord
@@ -72,6 +75,13 @@ func server() {
 
 
 		//https://socketloop.com/tutorials/golang-how-to-split-or-chunking-a-file-to-smaller-pieces
+	})
+
+	http.HandleFunc("/download", func(res http.ResponseWriter, req *http.Request) {
+		id, err := io.ReadAll(req.Body)
+		ErrCheck(err)
+
+		DownloadFiles(string(id))
 	})
 
 	// Server stuff
