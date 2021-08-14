@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -28,30 +29,37 @@ func server() {
 		os.MkdirAll("temp/file" + FileID, os.ModePerm)
 
 		// Create temp file
-		TempFile, err := ioutil.TempFile("temp", "upload*")
+		out, err := os.Create("temp/upload" + FileID)
 		ErrCheck(err)
-		defer TempFile.Close()
+		defer out.Close()
 
 		// Copy over the file
-		FileBytes, err := io.ReadAll(file)
-		ErrCheck(err)
+		//FileBytes, err := io.ReadAll(file)
+		//ErrCheck(err)
+
 
 		// Write file's data on the new temp file
-		TempFile.Write(FileBytes)
+		_, err = io.Copy(out, file)
+		ErrCheck(err)
 
-		FileInfo, _ := TempFile.Stat()
+		FileBytes, err := ioutil.ReadFile(out.Name())
+		ErrCheck(err)
+
+		FileInfo, _ := out.Stat()
 		FileSize := FileInfo.Size()
+		ChunkSize := 7 << 10
 
-		ChunkSize := 7 << 20
 		TotalChunks := int(math.Ceil(float64(FileSize) / float64(ChunkSize)))
-
 		for i := 0; i < TotalChunks; i++ {
 			// Use regular size unless it's the last piece
-			CurrentChunkSize := int(math.Min(float64(ChunkSize), float64(FileSize - int64(i * ChunkSize))))
+			CurrentSize := int(math.Min(float64(ChunkSize), float64(int(FileSize) - i * ChunkSize)))
 
 			// Slice the data into a chunk
-			ChunkData := make([]byte, CurrentChunkSize)
-			file.Read(ChunkData)
+			ChunkData := FileBytes[i * ChunkSize: i * ChunkSize + CurrentSize]
+			fmt.Println(ChunkData)
+
+			//ChunkData := make([]byte, CurrentSize)
+			//file.Read(ChunkData)
 
 			// Create file
 			FileName := "./temp/file" + FileID + "/chunk" + strconv.Itoa(i)
@@ -62,8 +70,8 @@ func server() {
 		}
 
 		// Delete temp file
-		err = os.Remove("temp/" + TempFile.Name())
-		ErrCheck(err)
+		//err = os.Remove(out.Name())
+		//ErrCheck(err)
 
 		// Collect all metadata for future reference
 		// Upload it to discord
