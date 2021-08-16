@@ -15,9 +15,12 @@ import (
 
 var discord *discordgo.Session
 
+var MetaDataChannel string = "874716702988980244"// Replace ID with your channel
+var StorageChannel string = "874477682501496852"// Replace ID with your channel
+
 func InitiateBot() {
 	// Get discord bot key
-	file, err := ioutil.ReadFile("key.txt")
+	file, err := ioutil.ReadFile("key.txt")// Open the file and insert your own key there
 	ErrCheck(err)
 
 	// Discord auth
@@ -52,7 +55,7 @@ func UploadFiles(data MetaData) {
 		defer file.Close()
 
 		// Send it
-		SentFile, err := discord.ChannelFileSend("874477682501496852", "chunk" + strconv.Itoa(i), file)
+		SentFile, err := discord.ChannelFileSend(StorageChannel, "chunk" + strconv.Itoa(i), file)
 		ErrCheck(err)
 
 		// Add ID to slice
@@ -64,18 +67,18 @@ func UploadFiles(data MetaData) {
 	for i := 0; i < len(AllFiles); i++ {
 		ids = ids + "," + AllFiles[i]
 	}
-	discord.ChannelMessageSend("874716702988980244", data.FileID + "," + data.FileName + ids)
+	discord.ChannelMessageSend(MetaDataChannel, data.FileID + "," + data.FileName + ids)
 }
 
 func DownloadFiles(id string) string {
 	// Get last 100 messages
-	msgs, err := discord.ChannelMessages("874716702988980244", 100, "", "", "")
+	msgs, err := discord.ChannelMessages(MetaDataChannel, 100, "", "", "")
 	ErrCheck(err)
 
 	for i := 0; i < len(msgs); i++ {
 		// Check for limit hit (100 msgs)
 		if i == 99 {
-			msgs2, err := discord.ChannelMessages("874716702988980244", 100, msgs[i].ID, "", "")
+			msgs2, err := discord.ChannelMessages(MetaDataChannel, 100, msgs[i].ID, "", "")
 			ErrCheck(err)
 
 			msgs = msgs2
@@ -85,27 +88,35 @@ func DownloadFiles(id string) string {
 		// Check ID
 		data := strings.Split(msgs[i].Content, ",")
 		if data[0] == id {
-			out, err := os.Create(data[1])
+			// Create directory just in case
+			err := os.MkdirAll("public/files", os.ModePerm)
+			ErrCheck(err)
+
+			out, err := os.Create("public/files/u" + data[0] + data[1])
 			ErrCheck(err)
 			defer out.Close()
 
 			// Download all chunks
 			for j := 2; j < len(data); j++ {
 				fmt.Println("test" +  strconv.Itoa(j))
-				msg, err := discord.ChannelMessage("874477682501496852", data[j])
+				msg, err := discord.ChannelMessage(StorageChannel, data[j])
 				ErrCheck(err)
 
 				res, err := http.Get(msg.Attachments[0].URL)
 				ErrCheck(err)
 				defer res.Body.Close()
 
-				fmt.Println(msg.Attachments[0].URL)
-
-				n, err := io.Copy(out, res.Body)
-				fmt.Println(n)
+				_, err = io.Copy(out, res.Body)
 				ErrCheck(err)
 			}
-			fmt.Println("testend")
+
+			// Saved for later cleanup
+			TempFileList = append(TempFileList, TempFile{
+				data[1],
+				data[0],
+			})
+
+			return "/files/u" + data[0] + data[1]
 		}
 	}
 
