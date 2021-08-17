@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <link rel="icon" href="img/icon.png" type="image/png" sizes="128x128 64x64 32x32 16x16 8x8">
+        <link rel="apple-touch-icon" href="img/icon.png">
+        <meta name="theme-color" content="#ff498f">
+        <title>Download | Discord Cloud Storage</title>
+        <meta name="description" content="Abusing Discord for unlimited cloud storage!">
+        <meta name="author" content="nekiwo">
+        <meta name="keywords" content="nekiwo, discord, cloud, storage">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto:wght@100" rel="stylesheet">
+        <link rel="stylesheet" href="css/index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <button onclick="download()">download</button>
+        <div id="topbar">
+            <div id="logo">Discord Cloud Storage</div>
+        </div>
+        <div id="doc">
+            <div id="dlbox">
+                <div id="dltitle">Press download</div>
+                <div id="dlbtn" onclick="download()">Download</div>
+            </div>
+            <a id="uploadmore" href="/">Upload More</a>
+        </div>
         <script src="d.js"></script>
     </body>
 </html>
