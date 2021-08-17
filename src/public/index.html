@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <link rel="icon" href="img/icon.png" type="image/png" sizes="128x128 64x64 32x32 16x16 8x8">
+        <link rel="apple-touch-icon" href="img/icon.png">
+        <meta name="theme-color" content="#ff498f">
+        <title>Upload | Discord Cloud Storage</title>
+        <meta name="description" content="Abusing Discord for unlimited cloud storage!">
+        <meta name="author" content="nekiwo">
+        <meta name="keywords" content="nekiwo, discord, cloud, storage">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto:wght@100" rel="stylesheet">
+        <link rel="stylesheet" href="css/index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <input type="file" id="input">
-        <button onclick="upload()">Upload</button>
+        <div id="topbar">
+            <div id="logo">Discord Cloud Storage</div>
+        </div>
+        <div id="doc">
+            <div id="uploadbox">
+                <div id="uploadtext" class="title">Drag file in the box below to upload</div>
+                <div id="upload">
+                    <input type="file" id="input">
+                </div>
+                <div id="uploadbtn" onclick="upload()">Upload!</div>
+            </div>
+            <div id="infobox">
+                <div id="infotitle" class="title">So, what is this?</div>
+                <div id="infocontent" class="content">
+                    Infamous 8MB limit for non-nitro users can get pretty annoying if you have a long video to share.<br/>
+                    This thing can chunk any of your files and upload them directly to discord, one by one piece, each being worth 8MB.<br/>
+                    When you need your file, it downloads all chunks and joins them together.<br/><br/>
+                    
+                    Feel free to upload very large files entirely on discord!
+                </div>
+            </div>
+            <div id="tutbox">
+                <div id="tuttitle" class="title">Instructions:</div>
+                <div id="tutcontent" class="content">
+                    1. Upload file<br/>
+                    2. Get link<br/>
+                    3. Use link<br/>
+                    4. Download file<br/>
+                </div>
+            </div>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>
