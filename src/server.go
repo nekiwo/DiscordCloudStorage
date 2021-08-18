@@ -16,7 +16,7 @@ var TempFileList []TempFile
 
 func server() {
 	// Static Pages
-	http.Handle("/", http.FileServer(http.Dir("./public")))
+	http.Handle("/", http.FileServer(http.Dir("public")))
 
 	// Routing
 	http.HandleFunc("/upload", func(res http.ResponseWriter, req *http.Request) {

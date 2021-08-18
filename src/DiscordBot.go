@@ -13,10 +13,10 @@ import (
 	"syscall"
 )
 
-var discord *discordgo.Session
-
 var MetaDataChannel string = "874716702988980244"// Replace ID with your channel
 var StorageChannel string = "874477682501496852"// Replace ID with your channel
+
+var discord *discordgo.Session
 
 func InitiateBot() {
 	// Get discord bot key
@@ -50,7 +50,7 @@ func UploadFiles(data MetaData) {
 	// Upload each chunk
 	for i := 0; i < data.TotalChunks; i++ {
 		// Open file
-		file, err := os.Open("./temp/file" + data.FileID + "/chunk" + strconv.Itoa(i))//var reader io.Reader = file
+		file, err := os.Open("temp/file" + data.FileID + "/chunk" + strconv.Itoa(i))//var reader io.Reader = file
 		ErrCheck(err)
 		defer file.Close()
 
@@ -67,7 +67,8 @@ func UploadFiles(data MetaData) {
 	for i := 0; i < len(AllFiles); i++ {
 		ids = ids + "," + AllFiles[i]
 	}
-	discord.ChannelMessageSend(MetaDataChannel, data.FileID + "," + data.FileName + ids)
+	_, err := discord.ChannelMessageSend(MetaDataChannel, data.FileID + "," + data.FileName + ids)
+	ErrCheck(err)
 }
 
 func DownloadFiles(id string) string {

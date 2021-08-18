@@ -1,0 +1,21 @@
+{
+  "name": "discordcloudstorage",
+  "version": "1.0.0",
+  "description": "Abusing Discord for unlimited cloud storage",
+  "main": "main.go",
+  "scripts": {
+      "build": "tsc src/public/d.ts src/public/index.ts --target ESNext && cd src && go run server.go DiscordBot.go main.go",
+      "build-ts": "tsc src/public/d.ts src/public/index.ts --target ESNext",
+      "build-go": "cd src && go run server.go DiscordBot.go main.go"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/nekiwo/DiscordCloudStorage.git"
+  },
+  "author": "nekiwo",
+  "license": "MIT",
+  "bugs": {
+      "url": "https://github.com/nekiwo/DiscordCloudStorage/issues"
+  },
+  "homepage": "https://github.com/nekiwo/DiscordCloudStorage#readme"
+}

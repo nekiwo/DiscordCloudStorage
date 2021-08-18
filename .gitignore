@@ -21,4 +21,7 @@
 /src/temp
 
 # Discord secret bot key
-/src/key.txt
+*.txt
+
+# JS build files
+*.js

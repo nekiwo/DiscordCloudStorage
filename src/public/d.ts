@@ -9,7 +9,7 @@ const download: Function = () => {
             "Content-Type": "text/plain"
         },
         body: new URLSearchParams(window.location.search).get("f")
-    }).then((data: Promise) => {
+    }).then((data: Response) => {
         // Get text from promise
         data.text().then((url: string) => {
             if (url != "null") {
@@ -17,7 +17,7 @@ const download: Function = () => {
                 DLTitle.innerHTML = "File downloading!"
 
                 // Download file
-                const link: Element = document.createElement("a")
+                const link: HTMLAnchorElement = document.createElement("a")
                 link.setAttribute("download", "")
                 link.href = url
                 document.body.appendChild(link)
