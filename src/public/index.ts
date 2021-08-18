@@ -1,5 +1,7 @@
 let DownloadURL: string = "null"
 
+const LinkBtn: HTMLElement = document.getElementById("linkbtn")
+
 const upload: Function = () => {
     const input: HTMLInputElement = <HTMLInputElement>document.getElementById("input")
     const file: File = input.files[0];
@@ -10,8 +12,12 @@ const upload: Function = () => {
         method: "POST",
         body: form
     }).then((data: Response) => {
+        console.log(data)
         data.text().then((url: string) => {
+            console.log(url)
             DownloadURL = url
+
+            LinkBtn.innerHTML = "Copy link"
         })
     }).catch((err: Error) => {
         console.log(err)
@@ -20,18 +26,16 @@ const upload: Function = () => {
 }
 
 const CopyLink: Function = () => {
-    const LinkBtn: HTMLElement = document.getElementById("linkbtn")
-
     if (DownloadURL != "null") {
         navigator.clipboard.writeText(DownloadURL).then(() => {
-            LinkBtn.innerHTML = "Copied!"
+            LinkBtn.innerHTML = "Link copied!"
             setTimeout(() => {
-                LinkBtn.innerHTML = "Copy"
+                LinkBtn.innerHTML = "Copy link"
             }, 2000)
         }, () => {
             LinkBtn.innerHTML = "Couldn't copy D:"
             setTimeout(() => {
-                LinkBtn.innerHTML = "Copy"
+                LinkBtn.innerHTML = "Copy link"
             }, 2000)
         })
     }

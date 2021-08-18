@@ -51,10 +51,6 @@ func server() {
 
 		TotalChunks := int(math.Ceil(float64(FileSize) / float64(ChunkSize)))
 
-		fmt.Println(FileSize)
-		fmt.Println(ChunkSize)
-		fmt.Println(TotalChunks)
-
 		for i := 0; i < TotalChunks; i++ {
 			// Use regular size unless it's the last piece
 			CurrentSize := int(math.Min(float64(ChunkSize), float64(int(FileSize) - i * ChunkSize)))
