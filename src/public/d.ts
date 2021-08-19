@@ -1,4 +1,4 @@
-const DLTitle: HTMLElement = document.getElementById("DLTitle")
+const DLTitle: HTMLElement = document.getElementById("dltitle")
 
 const download: Function = () => {
     DLTitle.innerHTML = "Searching for your file..."

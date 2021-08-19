@@ -1,6 +1,126 @@
 /*
 
 #40b3ff
-#0070ba
+#0033ff
+
+#a8bbff
 
 */
+:root {
+    --c1: #ff7626;
+    --c2: #0033ff;
+    --c3: #333333;
+    --c4: #b5c4ff;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+#topbar {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    padding: 16px;
+    background: #ffffff;
+}
+
+#logo {
+    font-weight: 900;
+    font-size: 32px;
+    color: var(--c2);
+    text-decoration: none;
+}
+
+#doc {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 86px;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+}
+
+.title {
+    padding: 16px;
+    font-size: 32px;
+    font-weight: 900;
+    width: 100%;
+    text-align: center;
+    color: var(--c3);
+}
+
+#upload {
+    height: 360px;
+    width: 100%;
+    background: var(--c4);
+    border: var(--c2) 5px dashed;
+    border-radius: 32px;
+    display: block;
+    text-align: center;
+    line-height: 360px;
+    vertical-align: middle;
+    font-size: 32px;
+    color: var(--c2);
+    cursor: pointer;
+    margin-bottom: 64px;
+}
+#upload:hover {
+    border: var(--c1) 5px dashed;
+}
+
+#input {
+    display: none;
+}
+
+.btn {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 16px;
+    font-size: 24px;
+    background: var(--c2);
+    color: #ffffff;
+    width: 30%;
+    margin-left: 35%;
+    border-radius: 32px;
+    cursor: pointer;
+    margin-bottom: 64px;
+}
+
+#linkbtn {
+    display: none;
+}
+
+.content {
+    padding: 32px;
+    font-size: 18px;
+    font-weight: 900;
+    width: 100%;
+    text-align: center;
+    color: var(--c3);
+}
+
+a {
+    color: var(--c2)
+}
+
+.divider {
+    width: 60%;
+    margin-left: 20%;
+    height: 0;
+    border: var(--c3) 4px solid;
+    border-radius: 4px;
+}
+
+
+@media only screen and (max-width: 768px) {
+   #doc {
+        padding: 8px;
+       width: 100%;
+   }
+}

@@ -17,7 +17,7 @@ const upload: Function = () => {
             console.log(url)
             DownloadURL = url
 
-            LinkBtn.innerHTML = "Copy link"
+            LinkBtn.style.display = "block";
         })
     }).catch((err: Error) => {
         console.log(err)

@@ -11,25 +11,25 @@
         <meta name="keywords" content="nekiwo, discord, cloud, storage">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto:wght@100" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto:wght@900" rel="stylesheet">
         <link rel="stylesheet" href="/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="topbar">
-            <div id="logo">Discord Cloud Storage</div>
-        </div>
         <div id="doc">
-            <div id="uploadbox">
-                <div id="uploadtext" class="title">Drag file in the box below to upload</div>
-                <div id="upload">
+            <div id="uploadbox" class="box">
+                <div id="uploadtitle" class="title">Drag file in the box below to upload</div>
+                <label id="upload">
                     <input type="file" id="input">
-                </div>
-                <div id="uploadbtn" onclick="upload()">Upload!</div>
+                    🔽
+                </label>
+                <div id="uploadbtn" class="btn" onclick="upload()">Upload!</div>
             </div>
-            <div id="linkbox">
-                <div id="linkbtn" onclick="CopyLink()">Waiting for upload...</div>
+            <div id="linkbox" class="box">
+                <div id="linkbtn" class="btn" onclick="CopyLink()">Copy Link</div>
             </div>
-            <div id="infobox">
+            <div class="divider"></div>
+            <div id="infobox" class="box">
                 <div id="infotitle" class="title">So, what is this?</div>
                 <div id="infocontent" class="content">
                     Infamous 8MB limit for non-nitro users can get pretty annoying if you have a long video to share.<br/>
@@ -38,16 +38,17 @@
                     
                     Feel free to upload very large files entirely on discord!
                 </div>
+                <div id="tuttitle" class="title">Simply upload file and use the generated link to later download your file back!</div><br/<br/>
             </div>
-            <div id="tutbox">
-                <div id="tuttitle" class="title">Instructions:</div>
-                <div id="tutcontent" class="content">
-                    1. Upload file<br/>
-                    2. Get link<br/>
-                    3. Use link<br/>
-                    4. Download file<br/>
+            <div class="divider"></div>
+            <div id="gitbox" class="box">
+                <div id="gitcontent" class="content">
+                    Made by <a href="https://github.com/nekiwo/">@nekiwo</a> on <a href="https://github.com/nekiwo/DiscordCloudStorage/">GitHub💾</a>
                 </div>
             </div>
+        </div>
+        <div id="topbar">
+            <a id="logo" href="/">Discord Cloud Storage</a>
         </div>
         <script src="index.js"></script>
     </body>

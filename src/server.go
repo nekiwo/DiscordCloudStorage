@@ -69,6 +69,10 @@ func server() {
 			ErrCheck(err)
 		}
 
+		// Send link
+		_, err = res.Write([]byte("/d?f=" + FileID))
+		ErrCheck(err)
+
 		fmt.Println("Done generating chunks for " + FileID)
 
 		// Collect all metadata for future reference
