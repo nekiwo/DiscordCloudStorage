@@ -15,15 +15,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="topbar">
-            <div id="logo">Discord Cloud Storage</div>
-        </div>
         <div id="doc">
-            <div id="dlbox">
-                <div id="dltitle">Press download</div>
-                <div id="dlbtn" onclick="download()">Download</div>
+            <div id="dlbox" class="box">
+                <div id="dltitle" class="title">Press download</div>
+                <div id="dlbtn" class="btn" style="margin-bottom: 0px" onclick="download()">Download</div>
             </div>
-            <a id="uploadmore" href="/">Upload More</a>
+            <a id="uploadmore" class="content" style="display: block; padding-left: 0;" href="/">Upload More</a>
+        </div>
+        <div id="topbar">
+            <a id="logo" href="/">Discord Cloud Storage</a>
         </div>
         <script src="d.js"></script>
     </body>
