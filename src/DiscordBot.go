@@ -93,7 +93,7 @@ func DownloadFiles(id string) string {
 			err := os.MkdirAll("public/files", os.ModePerm)
 			ErrCheck(err)
 
-			out, err := os.Create("public/files/u" + data[0] + "/" + data[1])
+			out, err := os.Create("public/files/u" + data[0] + data[1])
 			ErrCheck(err)
 			defer out.Close()
 
@@ -117,7 +117,7 @@ func DownloadFiles(id string) string {
 				data[0],
 			})
 
-			return "/files/u" + data[0] + "/" + data[1]
+			return "/files/u" + data[0] + data[1]
 		}
 	}
 
