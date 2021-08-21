@@ -7,5 +7,3 @@ When you need your file, it downloads all chunks and joins them together.
 ## Try it out!
 Link: https://discordcloudstorage.herokuapp.com/ <br/>
 Feel free to upload very large files entirely on discord!
-## IMPORTANT: Not done yet D:
-I swear, I just gotta finish my frontend and that's it!
