@@ -19,9 +19,3 @@
 
 # Testing chunk files
 /src/temp
-
-# Discord secret bot key
-*.txt
-
-# JS build files
-*.js
