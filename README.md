@@ -7,3 +7,8 @@ When you need your file, it downloads all chunks and joins them together.
 ## Try it out!
 Link: https://discordcloudstorage.herokuapp.com/ (Don't trust this with private files, I can see every chunk uploaded)<br/>
 Feel free to upload very large files entirely on discord!
+## How to run
+* Open project
+* Open terminal in `src` folder
+* Run `go build`
+* Run the executable
