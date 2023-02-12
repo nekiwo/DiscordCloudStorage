@@ -8,6 +8,7 @@ When you need your file, it downloads all chunks and joins them together.
 Due to Heroku free tier going down, I do not currently have a demo running :(<br>
 Suggest platforms for hosting in issues!
 ## How to run
+* create a `key.txt` file in `src` with your Discord bot secret
 * Open project
 * Open terminal in `src` folder
 * Run `go build`
