@@ -23,6 +23,3 @@
 
 # Discord secret bot key
 *.txt
-
-# JS build files
-*.js
