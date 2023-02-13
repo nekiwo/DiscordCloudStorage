@@ -4,7 +4,7 @@
   "description": "Abusing Discord for unlimited cloud storage",
   "main": "main.go",
   "scripts": {
-      "build": "tsc src/public/d.ts src/public/index.ts --target ESNext && cd src && go run server.go DiscordBot.go main.go",
+      "build": "tsc && cd src && go build -tags netgo -o dcs && ./dcs",
       "build-ts": "tsc src/public/d.ts src/public/index.ts --target ESNext",
       "build-go": "cd src && go run server.go DiscordBot.go main.go"
   },
