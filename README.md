@@ -10,6 +10,4 @@ Suggest platforms for hosting in issues!
 ## How to run
 * create a `key.txt` file in `src` with your Discord bot secret
 * Open project
-* Open terminal in `src` folder
-* Run `go build`
-* Run the executable
+* Run `npm run build`
