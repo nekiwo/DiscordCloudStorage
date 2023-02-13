@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,14 +12,14 @@ import (
 	"syscall"
 )
 
-var MetaDataChannel string = "874716702988980244"// Replace ID with your channel
-var StorageChannel string = "874477682501496852"// Replace ID with your channel
+var MetaDataChannel string = "874716702988980244" // Replace ID with your channel
+var StorageChannel string = "874477682501496852"  // Replace ID with your channel
 
 var discord *discordgo.Session
 
 func InitiateBot() {
 	// Get discord bot key
-	file, err := ioutil.ReadFile("key.txt")// Open the file and insert your own key there
+	file, err := os.ReadFile("key.txt") // Open the file and insert your own key there
 	ErrCheck(err)
 
 	// Discord auth
@@ -50,7 +49,7 @@ func UploadFiles(data MetaData) {
 	// Upload each chunk
 	for i := 0; i < data.TotalChunks; i++ {
 		// Open file
-		file, err := os.Open("temp/file" + data.FileID + "/chunk" + strconv.Itoa(i))//var reader io.Reader = file
+		file, err := os.Open("temp/file" + data.FileID + "/chunk" + strconv.Itoa(i)) //var reader io.Reader = file
 		ErrCheck(err)
 		defer file.Close()
 
@@ -99,7 +98,7 @@ func DownloadFiles(id string) string {
 
 			// Download all chunks
 			for j := 2; j < len(data); j++ {
-				fmt.Println("test" +  strconv.Itoa(j))
+				fmt.Println("test" + strconv.Itoa(j))
 				msg, err := discord.ChannelMessage(StorageChannel, data[j])
 				ErrCheck(err)
 

@@ -30,7 +30,7 @@ func server() {
 		req.MultipartReader()
 
 		// Create a directory for the file
-		FileID := strconv.FormatInt(time.Now().Unix(), 10);
+		FileID := strconv.FormatInt(time.Now().Unix(), 10)
 		os.MkdirAll("temp/file" + FileID, os.ModePerm)
 
 		// Create temp file
@@ -65,7 +65,7 @@ func server() {
 			defer chunk.Close()
 
 			// Save file
-			err = ioutil.WriteFile(FileName, ChunkData, os.ModeAppend)
+			err = os.WriteFile(FileName, ChunkData, os.ModeAppend)
 			ErrCheck(err)
 		}
 
