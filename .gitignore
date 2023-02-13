@@ -19,6 +19,7 @@
 
 # Testing chunk files
 /src/temp
+/src/public/files
 
 # Discord secret bot key
 *.txt
