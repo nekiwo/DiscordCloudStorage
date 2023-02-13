@@ -25,6 +25,6 @@
         <div id="topbar">
             <a id="logo" href="/">Discord Cloud Storage</a>
         </div>
-        <script src="d.js"></script>
+        <script src="/js/d.js"></script>
     </body>
 </html>
