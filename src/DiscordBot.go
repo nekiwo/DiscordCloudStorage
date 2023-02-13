@@ -19,7 +19,7 @@ var discord *discordgo.Session
 
 func InitiateBot() {
 	// Get discord bot key
-	file, err := os.ReadFile("key.txt") // Open the file and insert your own key there
+	file, err := os.ReadFile("../key.txt") // Open the file and insert your own key there
 	ErrCheck(err)
 
 	// Discord auth
